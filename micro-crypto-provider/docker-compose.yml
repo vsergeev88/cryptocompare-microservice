@@ -1,0 +1,21 @@
+version: '3.3'
+
+services:
+  micro-cryptocomparator:
+    build: .
+    container_name: micro-cryptocomparator
+    restart: always
+    networks:
+      - rabbitmq_queue
+  mysql:
+    image: mysql:5
+    restart: always
+    environment:
+      MYSQL_ROOT_PASSWORD: root
+      MYSQL_DATABASE: test
+    ports:
+      - '3306:3306'
+
+networks:
+  rabbitmq_queue:
+    external: true
