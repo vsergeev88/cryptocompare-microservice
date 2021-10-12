@@ -2,7 +2,7 @@ import { Controller } from '@nestjs/common';
 import { MessagePattern, Payload } from '@nestjs/microservices';
 import { AppService } from './app.service';
 import { CompareItemsService } from './compare-items/compare-items.service';
-import type { CompareRequestPayload } from './types';
+import type { CompareRequestPayload, Response } from './types';
 
 @Controller()
 export class AppController {
@@ -12,6 +12,12 @@ export class AppController {
   ) {}
 
   @MessagePattern('compare-request')
-  compare(@Payload() payload: CompareRequestPayload): void {
+  async compare(@Payload() payload: CompareRequestPayload): Promise<Response> {
+    const fetchedFromApi = await this.appService.fetchCryptoComparator(payload)
+    if (fetchedFromApi) {
+      return fetchedFromApi
+    }
+
+    return await this.compareItemsService.getFromDB(payload)
   }
 }

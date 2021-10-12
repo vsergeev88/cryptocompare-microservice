@@ -2,7 +2,7 @@ import { Injectable } from '@nestjs/common';
 import { InjectModel } from '@nestjs/sequelize';
 import { CreateItemDto } from './dto/create-item.dto';
 import { CompareItem } from './compare-item.model';
-import { ResponseCurrency } from '../types';
+import { CompareRequestPayload, CryptoResponse } from '../types';
 import { serializeResponse } from '../utils';
 
 @Injectable()
@@ -14,7 +14,7 @@ export class CompareItemsService {
 
   create(createItemDto: CreateItemDto): Promise<CompareItem> {
     const item = new CompareItem();
-    item.data = createItemDto.data;
+    item.data = JSON.stringify(createItemDto.data);
 
     return item.save();
   }
@@ -25,12 +25,9 @@ export class CompareItemsService {
     });
   }
 
-  dropTable(): Promise<void> {
-    return this.compareItemModel.drop();
-  }
-
-  async getFromDB(): Promise<ResponseCurrency> {
-    const data = await this.findLatest();
-    return serializeResponse(data);
+  async getFromDB(payload: CompareRequestPayload): Promise<CryptoResponse> {
+    const result = await this.findLatest();
+    const parsedData = JSON.parse(result.data) as CryptoResponse;
+    return serializeResponse(parsedData, payload);
   }
 }

@@ -1,3 +1,5 @@
+import { FSYMS, TSYMS } from '.';
+
 export type ResponseCurrency = {
   CHANGE24HOUR: string;
   CHANGEPCT24HOUR: string;
@@ -10,3 +12,7 @@ export type ResponseCurrency = {
   SUPPLY: string;
   MKTCAP: string;
 };
+
+type CurrencyInfo = Record<TSYMS, ResponseCurrency>;
+
+export type CryptoResponse = Partial<Record<FSYMS, CurrencyInfo>>;

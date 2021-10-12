@@ -1,7 +1,12 @@
-import { ResponseCurrency } from '../types';
+import {
+  FSYMS,
+  TSYMS,
+  ResponseCurrency,
+  CryptoResponse,
+  CompareRequestPayload,
+} from '../types';
 
-// TODO: use interceptor instead this workaround
-export const serializeResponse = (data: any): ResponseCurrency => {
+const serializeCurrencyData = (data: any): ResponseCurrency => {
   const {
     CHANGE24HOUR,
     CHANGEPCT24HOUR,
@@ -27,4 +32,25 @@ export const serializeResponse = (data: any): ResponseCurrency => {
     SUPPLY,
     MKTCAP,
   };
+};
+
+const filterTSYMS = (data: any, tsyms: TSYMS[]) => {
+  return Object.keys(data)
+    .filter(key => tsyms.includes(key as TSYMS))
+    .reduce(
+      (res, key) => ((res[key] = serializeCurrencyData(data[key])), res),
+      {},
+    );
+};
+
+export const serializeResponse = (
+  data: any,
+  { fsyms, tsyms }: CompareRequestPayload,
+): CryptoResponse => {
+  return Object.keys(data)
+    .filter(key => fsyms.includes(key as FSYMS))
+    .reduce(
+      (res, key) => ((res[key] = filterTSYMS(data[key], tsyms)), res),
+      {},
+    );
 };

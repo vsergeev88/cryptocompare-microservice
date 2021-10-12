@@ -1,2 +1,3 @@
-export * from './compare-payload';
-export * from './response-currency';
+export * from './payload';
+export * from './response';
+export * from './currencies';
