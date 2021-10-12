@@ -1,6 +1,6 @@
 import { Injectable } from '@nestjs/common';
 import axios, { AxiosResponse } from 'axios';
-import { CRYPTOCOMPARE_API_URL } from './constants';
+import { CRYPTOCOMPARE_API_URL, payloadDefault } from './constants';
 import { CompareRequestPayload, CryptoResponse } from './types';
 import { serializeResponse } from './utils';
 
@@ -18,5 +18,9 @@ export class AppService {
     }
 
     return null;
+  }
+
+  async scheduledFetch(): Promise<CryptoResponse> {
+    return await this.fetchCryptoComparator(payloadDefault);
   }
 }

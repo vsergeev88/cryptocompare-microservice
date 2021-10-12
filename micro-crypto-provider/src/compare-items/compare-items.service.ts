@@ -1,6 +1,5 @@
 import { Injectable } from '@nestjs/common';
 import { InjectModel } from '@nestjs/sequelize';
-import { CreateItemDto } from './dto/create-item.dto';
 import { CompareItem } from './compare-item.model';
 import { CompareRequestPayload, CryptoResponse } from '../types';
 import { serializeResponse } from '../utils';
@@ -12,9 +11,9 @@ export class CompareItemsService {
     private readonly compareItemModel: typeof CompareItem,
   ) {}
 
-  create(createItemDto: CreateItemDto): Promise<CompareItem> {
+  create(createItemDto: CryptoResponse): Promise<CompareItem> {
     const item = new CompareItem();
-    item.data = JSON.stringify(createItemDto.data);
+    item.data = JSON.stringify(createItemDto);
 
     return item.save();
   }

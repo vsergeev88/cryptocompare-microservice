@@ -1,6 +1,7 @@
 import { Module } from '@nestjs/common';
 import { ConfigModule } from '@nestjs/config';
 import { SequelizeModule } from '@nestjs/sequelize';
+import { ScheduleModule } from '@nestjs/schedule';
 import { AppController } from './app.controller';
 import { AppService } from './app.service';
 import { CompareItemsModule } from './compare-items/compare-items.module';
@@ -21,6 +22,7 @@ import { CompareItemsModule } from './compare-items/compare-items.module';
       autoLoadModels: true,
       synchronize: true,
     }),
+    ScheduleModule.forRoot(),
     CompareItemsModule,
   ],
   controllers: [AppController],
