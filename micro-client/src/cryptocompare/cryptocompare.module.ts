@@ -2,7 +2,7 @@ import { Module } from '@nestjs/common';
 import { ConfigModule, ConfigService } from '@nestjs/config';
 import { ClientsModule, Transport } from '@nestjs/microservices';
 import { Constants } from '../common/constants.enum';
-import { CryptoCompareController } from './logger.controller';
+import { CryptoCompareController } from './cryptocompare.controller';
 
 @Module({
   imports: [
@@ -27,4 +27,4 @@ import { CryptoCompareController } from './logger.controller';
   ],
   controllers: [CryptoCompareController],
 })
-export class LoggerModule {}
+export class CryptoComparatorModule {}

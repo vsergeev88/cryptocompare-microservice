@@ -1,8 +1,8 @@
 {
-  "name": "micro-logger",
+  "name": "micro-cryptocomparator",
   "version": "0.0.1",
   "description": "",
-  "author": "",
+  "author": "Valentin Sergeev",
   "private": true,
   "license": "UNLICENSED",
   "scripts": {

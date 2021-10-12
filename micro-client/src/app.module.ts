@@ -1,10 +1,10 @@
 import { Module } from '@nestjs/common';
 import { ConfigModule } from '@nestjs/config';
-import { LoggerModule } from './cryptocompare/logger.module';
+import { CryptoComparatorModule } from './cryptocompare/cryptocompare.module';
 
 @Module({
   imports: [
-    LoggerModule,
+    CryptoComparatorModule,
     ConfigModule.forRoot({
       envFilePath: '.env',
       expandVariables: true,

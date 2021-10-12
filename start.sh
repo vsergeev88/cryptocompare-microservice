@@ -4,7 +4,7 @@ docker-compose up -d
 cd ../
 
 printf '\nStarting logger service...\n'
-cd ./micro-logger
+cd ./micro-crypto-provider
 docker-compose up --build -d
 cd ../
 
