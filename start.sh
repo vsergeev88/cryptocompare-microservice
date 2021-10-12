@@ -3,8 +3,8 @@ cd ./rabbitmq
 docker-compose up -d
 cd ../
 
-printf '\nStarting logger service...\n'
-cd ./micro-crypto-provider
+printf '\nStarting cryptocompaarator service...\n'
+cd ./micro-cryptocomparator
 docker-compose up --build -d
 cd ../
 
